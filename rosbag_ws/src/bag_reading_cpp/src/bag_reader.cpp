@@ -57,7 +57,6 @@ private:
             auto next_msg_time = rclcpp::Time(next_msg->time_stamp);
             auto delay = std::chrono::nanoseconds((next_msg_time - current_msg_time_).nanoseconds());
 
-
             // Schedule the next callback
             timer_ = this->create_wall_timer(
                 delay, [this, next_msg]() {
@@ -87,7 +86,6 @@ private:
             }
         }
     }
-
 
     void publish_message(rosbag2_storage::SerializedBagMessageSharedPtr msg)
     {

@@ -10,12 +10,23 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rosbag2_transport REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(rclcpp_components REQUIRED)
 
 add_executable(bag_reader src/bag_reader.cpp)
-ament_target_dependencies(bag_reader rclcpp rosbag2_transport sensor_msgs)
+ament_target_dependencies(bag_reader rclcpp rosbag2_transport sensor_msgs rclcpp_components)
 
-add_executable(bag_spoofed_reader src/bag_spoofed_reader.cpp)
-ament_target_dependencies(bag_spoofed_reader rclcpp rosbag2_transport sensor_msgs)
+add_library(bag_spoofed_reader_component SHARED src/bag_spoofed_reader.cpp)
+ament_target_dependencies(bag_spoofed_reader_component rclcpp rosbag2_transport sensor_msgs rclcpp_components)
+
+rclcpp_components_register_nodes(bag_spoofed_reader_component "bag_reading_cpp::PlaybackSpoofedNode")
+# rclcpp_components_register_node(
+#   bag_spoofed_reader_component
+#     PLUGIN "bag_reading_cpp::PlaybackSpoofedNode"
+#     EXECUTABLE PlaybackSpoofedNode
+# )
+
+# add_executable(bag_spoofed_reader src/bag_spoofed_reader.cpp)
+# ament_target_dependencies(bag_spoofed_reader rclcpp rosbag2_transport sensor_msgs)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -34,10 +45,25 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-install(TARGETS
-  bag_spoofed_reader
-  DESTINATION lib/${PROJECT_NAME}
+install(DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME})
+
+install(DIRECTORY params
+  DESTINATION share/${PROJECT_NAME})
+
+ament_export_targets(bag_spoofed_reader_component)
+install(TARGETS bag_spoofed_reader_component
+        EXPORT bag_spoofed_reader_component
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
 )
+
+
+# install(TARGETS
+#   bag_spoofed_reader
+#   DESTINATION lib/${PROJECT_NAME}
+# )
 
 
 
