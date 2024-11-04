@@ -17,7 +17,9 @@ public:
     PlaybackNode(const std::string & bag_filename, bool loop)
     : Node("play_bag_node"), loop_(loop), bag_filename_(bag_filename), message_count_(0)
     {
-        publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("/perception/luminar_front/points", 10);
+        auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(rmw_qos_profile_sensor_data));
+        qos.best_effort();
+        publisher_ = this->create_publisher<sensor_msgs::msg::PointCloud2>("/perception/luminar_front/points", qos);
 
         // Set up the reader and open the bag file
         rosbag2_storage::StorageOptions storage_options;

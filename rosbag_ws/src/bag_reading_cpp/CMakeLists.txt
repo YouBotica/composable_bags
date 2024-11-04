@@ -14,6 +14,9 @@ find_package(sensor_msgs REQUIRED)
 add_executable(bag_reader src/bag_reader.cpp)
 ament_target_dependencies(bag_reader rclcpp rosbag2_transport sensor_msgs)
 
+add_executable(bag_spoofed_reader src/bag_spoofed_reader.cpp)
+ament_target_dependencies(bag_spoofed_reader rclcpp rosbag2_transport sensor_msgs)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -28,6 +31,11 @@ endif()
 
 install(TARGETS
   bag_reader
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(TARGETS
+  bag_spoofed_reader
   DESTINATION lib/${PROJECT_NAME}
 )
 
