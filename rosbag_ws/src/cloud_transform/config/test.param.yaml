@@ -1,0 +1,54 @@
+/alt_cloud_transform:
+  ros__parameters:
+    downsampling_leaf: 1
+    is_fused: true
+    #_______________________________________
+    # if is_fused == false:
+    front_lidar_source_frame: luminar_front
+    front_lidar_topic: /luminar_front_points
+    left_lidar_source_frame: luminar_left
+    left_lidar_topic: /luminar_left_points
+    right_lidar_source_frame: luminar_right
+    right_lidar_topic: /luminar_right_points
+    # else:
+    single_lidar_topic: /luminar_points
+    #_______________________________________
+    target_frame: center_of_gravity
+    voxel_leafx: 0.30000001192092896
+    voxel_leafy: 0.30000001192092896
+    voxel_leafz: 0.30000001192092896
+    z_axis_max: 10.0
+    z_axis_min: -3.0
+
+    mode: "czm" 
+    verbose: false   # To check effect of uprightness/elevation/flatness
+    visualize: true  # Ground Likelihood Estimation is visualized
+    
+    # Ground Plane Fitting parameters
+    sensor_height: 0.0
+    num_iter: 3             # Number of iterations for ground plane estimation using PCA.
+    num_lpr: 20             # Maximum number of points to be selected as lowest points representative.
+    num_min_pts: 5 #10         # Minimum number of points to be estimated as ground plane in each patch.
+    th_seeds: 0.3           # threshold for lowest point representatives using in initial seeds selection of ground points.
+    th_dist: 0.25           # threshold for thickenss of ground.
+    th_seeds_v: 0.25        # threshold for lowest point representatives using in initial seeds selection of vertical structural points.
+    th_dist_v: 0.1          # threshold for thickenss of vertical structure.
+    max_r: 150.0            # max_range of ground estimation area
+    min_r: 1.5              # min_range of ground estimation area
+    uprightness_thr: 0.707  # threshold of uprightness using in Ground Likelihood Estimation(GLE). Please refer paper for more information about GLE.
+
+    adaptive_seed_selection_margin: -1.2  # The points below the adaptive_seed_selection_margin * sensor_height are filtered
+    czm:
+      num_zones: 4
+      num_sectors_each_zone: [16, 32, 54, 32]
+      num_rings_each_zone: [3, 2, 2, 2] #[3, 2, 2, 2]
+      elevation_thresholds:  [0.1, 0.1, 0.1] # threshold of elevation for each ring using in GLE. Those values are updated adaptively.
+      flatness_thresholds:  [0.1, 0.1, 0.1]  # threshold of flatness for each ring using in GLE. Those values are updated adaptively.
+
+    enable_RNR : false
+    enable_RVPF : true
+    enable_TGR : true
+    
+    RNR_ver_angle_thr : -15.0 # Noise points vertical angle threshold. Downward rays of LiDAR are more likely to generate severe noise points.
+    RNR_intensity_thr : 0.2   # Noise points intensity threshold. The reflected points have relatively small intensity than others.
+    

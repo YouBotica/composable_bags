@@ -1,0 +1,28 @@
+/*/*/alt_cloud_transform:
+  ros__parameters:
+    cluster_tolerance: 0.4
+    downsampling_leaf: 1
+    existence_prob_threshold: 130
+    front_lidar_source_frame: luminar_front
+    front_lidar_topic: /perception/luminar_front/points
+    is_fused: false
+    left_lidar_source_frame: luminar_left
+    left_lidar_topic: /perception/luminar_left/points
+    max_cluster_size: 100000
+    min_cluster_size: 100
+    min_voxel_points: 10
+    octree_resolution: 0.1 # Voxel size
+    pitch_offset: 0.0
+    # qos_overrides./parameter_events.publisher.depth: 1000
+    # qos_overrides./parameter_events.publisher.durability: volatile
+    # qos_overrides./parameter_events.publisher.history: keep_last
+    # qos_overrides./parameter_events.publisher.reliability: reliable
+    right_lidar_source_frame: luminar_right
+    right_lidar_topic: /perception/luminar_right/points
+    target_frame: center_of_gravity
+    use_sim_time: false
+    voxel_leafx: 0.25
+    voxel_leafy: 0.25
+    voxel_leafz: 0.1
+    z_axis_max: 3.0
+    z_axis_min: -0.241

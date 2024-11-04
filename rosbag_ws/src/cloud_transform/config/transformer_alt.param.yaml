@@ -1,0 +1,23 @@
+/alt_cloud_transform:
+  ros__parameters:
+    downsampling_leaf: 1
+    is_fused: false
+    #_______________________________________
+    # if is_fused == false:
+    front_lidar_source_frame: luminar_front
+    front_lidar_topic: /perception/iris_front/pcl_common_layer
+    left_lidar_source_frame: luminar_left
+    left_lidar_topic: /perception/iris_left/pcl_common_layer
+    right_lidar_source_frame: luminar_right
+    right_lidar_topic: /perception/iris_right/pcl_common_layer
+    # else:
+    single_lidar_topic: /luminar_points_TEST # TODO: Should be published by the driver for performance
+    #_______________________________________
+    target_frame: center_of_gravity
+    voxel_leafx: 0.08
+    voxel_leafy: 0.08
+    voxel_leafz: 0.08
+    z_axis_max: 2.5
+    z_axis_min: -1.0
+    octree_resolution: 0.05
+    pitch_offset: 2.23 # degrees

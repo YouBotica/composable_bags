@@ -1,0 +1,23 @@
+/alt_cloud_transform:
+  ros__parameters:
+    downsampling_leaf: 1
+    is_fused: false
+    #_______________________________________
+    # if is_fused == false:
+    front_lidar_source_frame: luminar_front
+    front_lidar_topic: /luminar_lidar_front/points
+    left_lidar_source_frame: luminar_left
+    left_lidar_topic: /luminar_lidar_left/points
+    right_lidar_source_frame: luminar_right
+    right_lidar_topic: /luminar_lidar_right/points
+    # else:
+    single_lidar_topic: /luminar_points
+    #_______________________________________
+    target_frame: center_of_gravity
+    voxel_leafx: 0.30000001192092896
+    voxel_leafy: 0.30000001192092896
+    voxel_leafz: 0.30000001192092896
+    z_axis_max: 10.0
+    z_axis_min: -3.0
+    octree_resolution: 0.05
+
