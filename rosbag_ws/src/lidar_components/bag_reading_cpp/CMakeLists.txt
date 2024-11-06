@@ -13,8 +13,15 @@ find_package(sensor_msgs REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rosidl_default_runtime REQUIRED)
 
+find_package(rosbag2_cpp REQUIRED)
+find_package(rosbag2_storage REQUIRED)
+find_package(rosbag2_storage_default_plugins REQUIRED)
+
+add_executable(bag_luminars src/bag_luminars.cpp)
+ament_target_dependencies(bag_luminars rclcpp rosbag2_transport sensor_msgs rosbag2_cpp rosbag2_storage rosbag2_storage_default_plugins)
+
 add_executable(bag_reader src/bag_reader.cpp)
-ament_target_dependencies(bag_reader rclcpp rosbag2_transport sensor_msgs rclcpp_components)
+ament_target_dependencies(bag_reader rclcpp rosbag2_transport sensor_msgs)
 
 add_library(bag_spoofed_reader_component SHARED src/bag_spoofed_reader.cpp)
 ament_target_dependencies(bag_spoofed_reader_component rclcpp rosbag2_transport sensor_msgs rclcpp_components rosidl_default_runtime)
@@ -38,6 +45,7 @@ endif()
 
 install(TARGETS
   bag_reader
+  bag_luminars
   DESTINATION lib/${PROJECT_NAME}
 )
 
